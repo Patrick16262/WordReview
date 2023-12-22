@@ -1,0 +1,67 @@
+
+.root {
+    /*If it is an external font, you need to load it; @font-face {...} */
+    -fx-font-family: "Microsoft YaHei";
+    -fx-background-color: transparent;
+}
+
+.progress-bar {
+    -fx-accent: #0f4ad3;
+}
+
+.progress-bar .track {
+    -fx-background-color: #f2f2f2;
+}
+
+.button {
+    -fx-font-weight: Bold;
+    -fx-background-color: #0f4ad3;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-font-size: 16;
+
+}
+
+.button:pressed {
+    -fx-background-color: #0E3692; /* 鼠标点击时按钮背景颜色 */
+}
+
+.big-button {
+    -fx-font-size: 24;
+}
+
+#upper-text {
+    -fx-text-fill: #ffffff;
+}
+
+#down-text {
+    -fx-font-family: "Microsoft YaHei";
+    -fx-font-smoothing-type: gray;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 10;
+}
+/*If it is an external font, you need to load it; @font-face {...} */
+
+.inner-box {
+    -fx-background-color: #fbfbfb;
+    -fx-background-radius: 0px;
+    -fx-font-size: 16;
+}
+
+.big-int {
+    -fx-font-weight: Bold;
+    -fx-font-size: 48;
+}
+
+.small-int {
+    -fx-font-size: 16;
+}
+
+#menu-button {
+    -fx-background-color: blue;
+    -fx-background-radius: 10;
+}
+
+#menu-button:pressed {
+    -fx-background-color: #0F4AD3;
+}
