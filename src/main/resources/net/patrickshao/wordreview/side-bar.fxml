@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.leewyatt.rxcontrols.controls.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-
-<VBox id="sidebar" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.patrickshao.wordreview.controller.SideBar">
+<VBox id="sidebar" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="200.0" stylesheets="@side-bar.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.patrickshao.wordreview.controller.SideBar">
    <children>
-      <Button fx:id="hide_button" mnemonicParsing="false" text="Button" />
+      <HBox>
+         <children>
+            <RXAvatar minHeight="75.0" minWidth="75.0" prefHeight="75.0" prefWidth="75.0" shapeType="SQUARE" />
+            <VBox alignment="CENTER">
+               <children>
+                  <Label id="user-label" fx:id="user_label" text="登录同步数据">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="上次同步：无" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <RXLineButton animationTime="35.0ms" prefHeight="60.0" text=" 主       页">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontIcon fx:id="house_font" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </graphic>
+      </RXLineButton>
+      <RXLineButton fx:id="plan_font" animationTime="35.0ms" prefHeight="60.0" text=" 学习计划">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontIcon fx:id="calen_font" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </graphic>
+      </RXLineButton>
+      <RXLineButton animationTime="35.0ms" prefHeight="60.0" text=" 词书管理">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontIcon fx:id="book_font" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </graphic>
+      </RXLineButton>
+      <RXLineButton animationTime="35.0ms" prefHeight="60.0" text=" 字典管理">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontIcon fx:id="dict_font" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </graphic>
+      </RXLineButton>
+      <RXLineButton animationTime="35.0ms" prefHeight="74.0" prefWidth="200.0" text=" 关        于">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <graphic>
+            <FontIcon fx:id="info_font" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </graphic>
+      </RXLineButton>
    </children>
 </VBox>

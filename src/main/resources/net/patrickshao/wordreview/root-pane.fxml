@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<AnchorPane fx:id="shadow_pane" styleClass="backgraund" stylesheets="@root-pane.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.patrickshao.wordreview.controller.RootPane">
+   <children>
+      <AnchorPane fx:id="root_pane" layoutX="14.0" layoutY="19.0" prefHeight="600.0" prefWidth="800.0" styleClass="root-pane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <HBox id="upper-bar" fx:id="top_bar" alignment="BOTTOM_RIGHT" prefHeight="40.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox spacing="5.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button id="show_menu" fx:id="menu" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <graphic>
+                              <FontIcon fx:id="menu_font" iconColor="WHITE" iconSize="24" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </graphic>
+                        </Button>
+                        <Label prefHeight="40.0" prefWidth="99.0" text="词海星空" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Button id="mini" fx:id="mini" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+                     <graphic>
+                        <FontIcon id="mini-font" fx:id="mini_font" iconColor="#909090" iconSize="18" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </graphic>
+                  </Button>
+                  <Button id="close" fx:id="close" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+                     <graphic>
+                        <FontIcon id="close-font" fx:id="close_font" iconColor="#909090" iconSize="24" strokeType="OUTSIDE" strokeWidth="0.0" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <AnchorPane id="main-pane" fx:id="main_pane" layoutX="100.0" layoutY="40.0" prefHeight="560.0" prefWidth="600.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

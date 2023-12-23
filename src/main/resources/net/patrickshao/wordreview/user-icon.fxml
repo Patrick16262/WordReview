@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="80.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.patrickshao.wordreview.controller.UserIcon">
+<HBox stylesheets="user-icon.css" alignment="CENTER_RIGHT" fillHeight="false" prefHeight="80.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.patrickshao.wordreview.controller.UserIcon">
    <children>
       <Label id="lab" fx:id="label" text="登陆以线上同步">
          <font>

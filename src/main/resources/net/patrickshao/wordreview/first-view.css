@@ -19,16 +19,17 @@
     -fx-text-fill: #ffffff;
     -fx-background-radius: 5px;
     -fx-font-size: 16;
+}
 
+
+.button:hover {
+    -fx-background-color: blue;
 }
 
 .button:pressed {
     -fx-background-color: #0E3692; /* 鼠标点击时按钮背景颜色 */
 }
 
-.big-button {
-    -fx-font-size: 24;
-}
 
 #upper-text {
     -fx-text-fill: #ffffff;
@@ -38,7 +39,6 @@
     -fx-font-family: "Microsoft YaHei";
     -fx-font-smoothing-type: gray;
     -fx-text-fill: #ffffff;
-    -fx-font-size: 10;
 }
 /*If it is an external font, you need to load it; @font-face {...} */
 
@@ -54,7 +54,12 @@
 }
 
 .small-int {
-    -fx-font-size: 16;
+    -fx-text-fill: gray;
+    -fx-font-size: 24;
+}
+
+#today-label {
+    -fx-font-weight: Bold;
 }
 
 #menu-button {

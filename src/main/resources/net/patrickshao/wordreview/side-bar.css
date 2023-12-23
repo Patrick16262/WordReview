@@ -1,5 +1,17 @@
+.root {
+    -fx-font-family: "Microsoft YaHei";
+}
+
 #sidebar {
     -fx-background-color: #F6F6F6;
     -fx-border-color: #F0F0F0;
     -fx-border-width: 2;
+}
+
+#user-label:hover {
+    -fx-underline: true;
+}
+
+#user-label:pressed {
+    -fx-underline: true;
 }
