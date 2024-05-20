@@ -21,7 +21,7 @@ public class ChatGPT3Turbo extends PromptedAI {
 
     @Override
     public @NonNull String sendMessage(String message) throws AIConnectFaultException {
-        final String key = "sk-LK9ch8aSzAml5YXwAVuGkKZ2vQFopgRK0R46KbeMFB8UqVvG";
+        final String key = "null";
         //原本api，但没有充值： final String key = "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";
         var client = HttpClient.newHttpClient();
         //镜像api https://api.chatanywhere.com.cn
