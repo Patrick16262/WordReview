@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.dialog.Login">
+   <children>
+      <VBox alignment="CENTER" prefWidth="400.0" spacing="10.0" styleClass="pane" stylesheets="@dialog.css">
+         <children>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="登录">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="title-label" />
+                        <String fx:value="bold-label" />
+                     </styleClass>
+                  </Label>
+                  <Label text="|">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="to_register" text="注册">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="title-label" />
+                        <String fx:value="selectable-text" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </HBox>
+            <GridPane alignment="CENTER" hgap="10.0" prefHeight="66.0" styleClass="common-label" vgap="10.0">
+              <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="28.200000000000003" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="137.20000000000002" minWidth="0.0" prefWidth="41.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="289.40000000000003" minWidth="10.0" prefWidth="251.8" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="email_field" prefHeight="30.0" prefWidth="283.0" styleClass="field" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font></TextField>
+                  <PasswordField fx:id="pwd_field" prefHeight="30.0" prefWidth="274.0" styleClass="field" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font></PasswordField>
+                  <Label styleClass="common-label" text="邮箱" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label styleClass="common-label" text="密码" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <FontIcon fx:id="user_font" iconColor="#a4a8ac" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="common-label">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </FontIcon>
+                  <FontIcon fx:id="pwd_font" iconColor="#a4a8ac" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="common-label" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </FontIcon>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets right="20.0" />
+               </VBox.margin>
+            </GridPane>
+            <Label fx:id="response" styleClass="common-label" />
+            <HBox alignment="CENTER" spacing="50.0">
+               <children>
+                  <Button fx:id="submit" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="common-button" text="登录">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="common-button" text="取消">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="25.0" top="25.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

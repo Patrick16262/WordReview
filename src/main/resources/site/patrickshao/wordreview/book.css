@@ -1,0 +1,7 @@
+.root {
+    -fx-background-color: transparent;
+}
+
+#image:hover {
+    -fx-effect: innershadow(gaussian , #FbFbFb, 10, 0.25, -5, -5);
+}

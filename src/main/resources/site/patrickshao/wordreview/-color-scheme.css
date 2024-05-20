@@ -1,0 +1,14 @@
+.text {
+    -fx-text-fill: #515151;
+}
+
+.grey-background {
+    -fx-background-color: #F6F7F8;
+}
+
+.blue-button {
+    -fx-font-weight: Bold;
+    -fx-background-color: #0f4ad3;
+    -fx-text-fill: #ffffff;
+}
+

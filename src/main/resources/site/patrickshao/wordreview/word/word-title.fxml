@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox alignment="CENTER" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.WordTitle">
+   <children>
+      <Label fx:id="word_title" styleClass="title" text="Word" />
+      <FontIcon fx:id="speech" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="selectable-icon" text="Text" />
+   </children>
+</VBox>

@@ -1,0 +1,72 @@
+
+.root {
+    /*If it is an external font, you need to load it; @font-face {...} */
+    -fx-font-family: "Microsoft YaHei";
+    -fx-background-color: transparent;
+}
+
+.progress-bar {
+    -fx-accent: #0f4ad3;
+}
+
+.progress-bar .track {
+    -fx-background-color: #f2f2f2;
+}
+
+.button {
+    -fx-font-weight: Bold;
+    -fx-background-color: #0f4ad3;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5px;
+    -fx-font-size: 16;
+}
+
+
+.button:hover {
+    -fx-background-color: blue;
+}
+
+.button:pressed {
+    -fx-background-color: #0E3692; /* 鼠标点击时按钮背景颜色 */
+}
+
+
+#upper-text {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20;
+}
+
+#down-text {
+    -fx-font-family: "Microsoft YaHei";
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 10;
+}
+/*If it is an external font, you need to load it; @font-face {...} */
+
+.inner-box {
+    -fx-background-color: #F6F7F8;
+    -fx-background-radius: 10px;
+    -fx-font-size: 16;
+}
+
+.big-int {
+    -fx-font-weight: Bold;
+    -fx-font-size: 48;
+}
+
+.small-int {
+    -fx-text-fill: #6A6672;
+    -fx-font-size: 24;
+}
+
+#change-label {
+    -fx-text-fill: #0f4ad3;
+}
+#change-label:hover {
+    -fx-text-fill: blue;
+    -fx-underline: true;
+}
+
+#today-label {
+    -fx-font-weight: Bold;
+}

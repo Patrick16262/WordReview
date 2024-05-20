@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.leewyatt.rxcontrols.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.SideBar">
+   <children>
+      <VBox layoutX="9.0" layoutY="9.0" stylesheets="@side-bar.css">
+         <children>
+            <HBox>
+               <children>
+                  <StackPane prefHeight="80.0" prefWidth="80.0">
+                     <children>
+                        <ImageView fx:id="userImage" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </ImageView>
+                     </children>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color opacity="0.5" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </StackPane>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Label id="user-label" fx:id="user_name" styleClass="common-label" text="登录同步数据">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="sync_text" styleClass="common-label" text="上次同步：无" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" scaleY="0.5" />
+            <RXLineButton fx:id="_0" animationTime="35.0ms" prefHeight="60.0" text=" 主       页">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="house_font" iconColor="#515151" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="common-label" />
+                  <String fx:value="selectable-text" />
+               </styleClass>
+            </RXLineButton>
+            <RXLineButton fx:id="_1" animationTime="35.0ms" prefHeight="60.0" text=" 学习计划">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="calen_font" iconColor="#515151" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="common-label" />
+                  <String fx:value="selectable-text" />
+               </styleClass>
+            </RXLineButton>
+            <RXLineButton fx:id="_2" animationTime="35.0ms" prefHeight="60.0" text=" 词书管理">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="book_font" iconColor="#515151" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="common-label" />
+                  <String fx:value="selectable-text" />
+               </styleClass>
+            </RXLineButton>
+            <RXLineButton fx:id="_3" animationTime="35.0ms" opacity="0.0" prefHeight="60.0" text=" 字典管理">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="dict_font" iconColor="#515151" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </graphic>
+            </RXLineButton>
+            <RXLineButton fx:id="_4" animationTime="35.0ms" prefHeight="74.0" prefWidth="200.0" text=" 关        于">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <FontIcon fx:id="info_font" iconColor="#515151" strokeType="OUTSIDE" strokeWidth="0.0" />
+               </graphic>
+               <styleClass>
+                  <String fx:value="common-label" />
+                  <String fx:value="selectable-text" />
+               </styleClass>
+            </RXLineButton>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

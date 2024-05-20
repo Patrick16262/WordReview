@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="560.0" prefWidth="800.0" stylesheets="@tutor.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.tutor.SetTran">
+
+</AnchorPane>

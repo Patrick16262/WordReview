@@ -1,0 +1,44 @@
+.root {
+    /*If it is an external font, you need to load it; @font-face {...} */
+    -fx-font-family: "Microsoft YaHei";
+    -fx-background-color: transparent;
+}
+
+.pane {
+    -fx-background-color: transparent;
+}
+
+#field {
+    -fx-background-color: #F7F8FA;
+    -fx-border-color: #F0F0F0;
+    -fx-border-width: 2;
+}
+
+#search-btn {
+    -fx-background-color: #0f4ad3;
+}
+
+#search-btn:hover {
+    -fx-background-color: blue;
+}
+
+#font-icon {
+    -fx-text-fill: #ffffff;
+}
+
+.scroll-bar {
+
+}
+
+.title {
+    -fx-font-weight: Bold;
+    -fx-font-size: 18;
+}
+
+.scroll-bar {
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #6A6672;
+}

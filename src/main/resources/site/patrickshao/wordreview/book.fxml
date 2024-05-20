@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="100.0" spacing="10.0" stylesheets="@book.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.Book">
+   <children>
+      <Pane>
+         <children>
+            <ImageView id="image" fx:id="book_image" fitHeight="140.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color opacity="0.5" />
+               </color></DropShadow>
+         </effect>
+      </Pane>
+      <Label fx:id="book_label" alignment="TOP_CENTER" prefHeight="40.0" prefWidth="100.0" text="BOOK_NAME  BOOK_NAME" textAlignment="CENTER" wrapText="true" />
+   </children>
+</VBox>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<Button xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        fx:controller="site.patrickshao.wordreview.gui.controller.dialog.DialogCloseBtn"
+        fx:id="close_button"
+        layoutX="360.0" layoutY="0.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="close-button">
+<graphic>
+    <FontIcon fx:id="close_font" iconSize="24" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="close-font" />
+</graphic></Button>

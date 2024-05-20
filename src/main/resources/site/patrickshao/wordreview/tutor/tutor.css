@@ -1,0 +1,27 @@
+.root{
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Microsoft YaHei UI";
+}
+
+.common-button {
+    -fx-font-weight: Bold;
+    -fx-background-color: #0f4ad3;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15;
+}
+
+.common-button:hover {
+    -fx-background-color: blue;
+}
+
+.inner-box {
+    -fx-background-color: #F6F7F8;
+    -fx-background-radius: 10px;
+    -fx-font-size: 16;
+}
+
+.title {
+    -fx-text-fill: rgba(68,68,68,0.96);
+    -fx-font-weight: Bold;
+    -fx-font-size: 28;
+}

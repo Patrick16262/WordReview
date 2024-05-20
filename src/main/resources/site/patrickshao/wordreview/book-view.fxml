@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox prefHeight="560.0" prefWidth="600.0" styleClass="pane" stylesheets="@book-view.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.BookView">
+   <children>
+      <ScrollPane id="scroll-pane" hbarPolicy="NEVER" prefHeight="565.0" prefWidth="600.0" styleClass="pane" vbarPolicy="ALWAYS">
+        <content>
+          <AnchorPane id="pane" fx:id="pane" minHeight="0.0" minWidth="0.0" prefWidth="600.0" styleClass="pane">
+               <children>
+                  <VBox id="pane" fx:id="vbox_content" styleClass="pane">
+                     <children>
+                        <VBox fx:id="vbox_mybook">
+                           <children>
+                              <AnchorPane id="pane" prefHeight="50.0" prefWidth="586.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" styleClass="title" text="我的词书">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <FlowPane fx:id="my_pane" hgap="80.0" maxWidth="590.0" minWidth="590.0" prefWidth="590.0" styleClass="pane" vgap="30.0">
+                                 <padding>
+                                    <Insets bottom="30.0" left="60.0" top="30.0" />
+                                 </padding>
+                              </FlowPane>
+                           </children>
+                        </VBox>
+                        <Separator prefWidth="200.0" scaleY="0.5" />
+                        <HBox alignment="CENTER" styleClass="pane">
+                           <children>
+                              <Label styleClass="title" text="预置词书">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox HBox.hgrow="ALWAYS" />
+                              <TextField id="field" fx:id="search_field" prefHeight="30.0">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font></TextField>
+                              <Button id="search-btn" fx:id="search_btn" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
+                                 <graphic>
+                                    <FontIcon id="font-icon" fx:id="search_font" iconColor="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <FlowPane fx:id="rec_pane" hgap="80.0" layoutX="10.0" layoutY="60.0" maxWidth="590.0" minWidth="590.0" prefWidth="590.0" styleClass="pane" vgap="30.0">
+                           <padding>
+                              <Insets bottom="30.0" left="60.0" top="30.0" />
+                           </padding>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</VBox>
