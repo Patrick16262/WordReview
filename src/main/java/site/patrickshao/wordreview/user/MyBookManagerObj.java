@@ -1,8 +1,11 @@
 package site.patrickshao.wordreview.user;
 
+import com.google.gson.Gson;
 import javafx.util.Pair;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import site.patrickshao.wordreview.dictionaries.entity.basic.Translation;
 import site.patrickshao.wordreview.user.entity.LearnedTran;
 import site.patrickshao.wordreview.user.entity.PlanGenerator;
@@ -12,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MyBookManagerObj {
     private transient Map<String, MyBook> myBooks = new HashMap<>();
     private transient MyBook currentMyBook;
@@ -20,7 +23,7 @@ public class MyBookManagerObj {
     private transient final HashSet<LearnedTran> needReview = new HashSet<>();
     private transient final HashSet<String> needLearn = new HashSet<>();
     private transient int learnedNumToday;
-    private transient int needLearnToday; //包括已学的
+    private transient int needLearnNumToday; //不包括已学的
     private transient int reviewedNumToday;
     private transient int needReviewNumToday; //不包括已复习的
 
@@ -38,7 +41,7 @@ public class MyBookManagerObj {
                             list.stream().forEach(e -> plan.add(new Pair<>(currentMyBook.getWordBook().getTranslation(e),
                                     learnMethod))
                             )
-                    );
+            );
         });
         return plan;
     };
@@ -63,37 +66,50 @@ public class MyBookManagerObj {
 
     public void refreshLearned() {
         learnedNumToday = 0;
-        needLearnToday = ConfigManager.getConfig().word_num_per_day;
+        needLearnNumToday = 0;
         reviewedNumToday = 0;
         needReviewNumToday = 0;
 
+        if (currentMyBook == null) return;
         myBooks.values().stream().forEach(
                 myBook -> myBook.getLearnedTrans().values().stream().forEach(
                         recited -> {
-                            if (recited.markedTooEasy) return;
                             LocalDateTime dateTime = LocalDateTime.now();
-                            dateTime.minusHours(12);
-                            if (recited.learned.compareTo(dateTime) > 0) learnedNumToday++;
-                            else if (recited.reviewed.isEmpty()) needReview.add(recited);
+                            dateTime = dateTime.minusHours(12);
+                            if (recited.learned.isAfter(dateTime)) learnedNumToday++;
+                            else if (recited.reviewed.isEmpty()) {
+                                if (recited.markedTooEasy) return;
+                                needReview.add(recited);
+                            }
                             //简单粗暴判断是否隔一天需要复习;
                             System.err.println("正在使用简化版的复习方案");
                         }
                 )
         );
+        needReviewNumToday = needReview.size();
         if (ConfigManager.getConfig().word_num_per_day - learnedNumToday > 0) {
             var list = currentMyBook.getWordBook().getTranslations().
                     keySet().stream().filter(key -> !currentMyBook.getLearnedTrans().containsKey(key))
                     .toList();
             list = list.subList(0, Math.min(list.size(), ConfigManager.getConfig().word_num_per_day - learnedNumToday));
-            needLearnToday = list.size();
+            needLearnNumToday = list.size();
             needLearn.addAll(list);
         }
+
     }
 
     public void linkAllBooks() {
         myBooks.forEach((a, b) -> {
             b.linkBook();
         });
+    }
+
+    public void addLearned(String id) {
+        currentMyBook.addLearned(id);
+    }
+
+    public void addReviewed(String id) {
+        currentMyBook.addReviewed(id);
     }
 
     public void setBook(String bookId) {
@@ -110,6 +126,31 @@ public class MyBookManagerObj {
         return myBooks.get(id);
     }
 
+    public static MyBookManagerObj fromJson(String string) {
+        var jsonObj = new Gson().fromJson(string, jsonObj.class);
+        MyBookManagerObj obj = new MyBookManagerObj();
+        Arrays.stream(jsonObj.myBooks).map(MyBook::fromJson)
+                .forEach(myBook -> obj.myBooks.put(myBook.getBook_id(), myBook));
+        obj.currentMyBook = obj.getMyBook(jsonObj.currentMyBook);
+//        obj.linkAllBooks();
+//        obj.refreshLearned();
+        return obj;
+    }
+
+    public static MyBookManagerObj createEmptyObj() {
+        return new MyBookManagerObj();
+    }
+
+    public String toJson() {
+        var jsonObj = new jsonObj();
+        jsonObj.myBooks = myBooks.values().stream()
+                .map(MyBook::toJson)
+                .toArray(String[]::new);
+        if (currentMyBook != null)
+        jsonObj.currentMyBook = currentMyBook.getBook_id();
+        return new Gson().toJson(jsonObj);
+    }
+
     private static <T> List<List<T>> groupList(List<T> list, int groupSize) {
         List<List<T>> groupedLists = new ArrayList<>();
         for (int i = 0; i < list.size(); i += groupSize) {
@@ -117,5 +158,10 @@ public class MyBookManagerObj {
             groupedLists.add(list.subList(i, end));
         }
         return groupedLists;
+    }
+
+    private class jsonObj {
+        public String[] myBooks;
+        public String currentMyBook;
     }
 }

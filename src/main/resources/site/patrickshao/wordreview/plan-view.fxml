@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox prefHeight="560.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.PlanView">
+<VBox prefHeight="560.0" prefWidth="600.0" spacing="20.0" stylesheets="@plan-view.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.PlanView">
    <children>
-      <ScrollPane prefHeight="570.0" prefWidth="600.0" />
+      <HBox spacing="10.0">
+         <children>
+            <Label styleClass="common-label" text="词义显示" />
+            <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <RadioButton fx:id="explain_simple" mnemonicParsing="false" styleClass="common-label" text="精简" />
+                  <RadioButton fx:id="explain_normal" mnemonicParsing="false" styleClass="common-label" text="普通" />
+                  <RadioButton fx:id="explain_all" mnemonicParsing="false" styleClass="common-label" text="全面" />
+               </children></VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefWidth="560.0" spacing="5.0">
+         <children>
+            <Label styleClass="common-label" text="每日背诵" />
+            <TextField fx:id="word_num" maxWidth="50.0" styleClass="field-small" HBox.hgrow="NEVER" />
+            <Label styleClass="common-label" text="个单词" />
+         </children>
+      </HBox>
    </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </VBox>

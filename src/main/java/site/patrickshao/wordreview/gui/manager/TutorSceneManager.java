@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import lombok.Getter;
 import site.patrickshao.wordreview.Main;
+import site.patrickshao.wordreview.exception.UnhandledException;
 import site.patrickshao.wordreview.user.ConfigManager;
 import site.patrickshao.wordreview.user.entity.Config;
 import site.patrickshao.wordreview.user.entity.TranStyle;
@@ -35,7 +36,7 @@ public class TutorSceneManager {
         root = rootPane;
         config = new Config();
         this_page = 0;
-        config.tranStyle = TranStyle.single_meaning;
+        config.tranStyle = TranStyle.single_syno;
         config.differsImportance = true;
 
 
@@ -48,6 +49,11 @@ public class TutorSceneManager {
     public static void close() {
         setConfig();
         root.getChildren().remove(tutor_root);
+        try {
+            ConfigManager.saveConfig();
+        } catch (IOException e) {
+            throw new UnhandledException(e);
+        }
         OnTutorClose.run();
     }
 
@@ -123,7 +129,7 @@ public class TutorSceneManager {
         close_button.setOnAction(actionEvent -> close());
 
         pages.add((Pane) loadFXML("set-tran"));
-        pages.add((Pane) loadFXML("set-diff"));
+//        pages.add((Pane) loadFXML("set-diff"));
         pages.add((Pane) loadFXML("set-book"));
         pages.add((Pane) loadFXML("set-account"));
 

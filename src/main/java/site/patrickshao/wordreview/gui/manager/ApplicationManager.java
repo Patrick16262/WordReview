@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Getter;
 import lombok.Setter;
+import site.patrickshao.wordreview.exception.UnhandledException;
 import site.patrickshao.wordreview.user.ConfigManager;
 
 import java.io.IOException;
@@ -28,6 +29,11 @@ public class ApplicationManager extends Application {
     }
 
     public static void hide() {
+        try {
+            ConfigManager.saveConfig();
+        } catch (IOException e) {
+            throw new UnhandledException(e);
+        }
         primaryStage.hide();
     }
 
@@ -36,8 +42,8 @@ public class ApplicationManager extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        ConfigManager.loadConfig();
-        StorgeManager.loadAllAsset();
+        StorgeManager.load();
+
         primaryStage.setOnHidden(e -> {
             backgroundExecutor.shutdown();});
         primaryStage.initStyle(StageStyle.TRANSPARENT);

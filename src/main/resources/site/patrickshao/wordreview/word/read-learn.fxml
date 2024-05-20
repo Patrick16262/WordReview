@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@word.css"
-            fx:controller="site.patrickshao.wordreview.gui.controller.word.ReadLearn"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.ReadLearn">
+   <children>
+      <VBox fx:id="vbox_pane" alignment="CENTER" layoutX="268.0" layoutY="111.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="inner-box" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Label fx:id="header_label" styleClass="common-label" text="以下单词您是否认识" />
+            <Label fx:id="meaning_label" styleClass="common-label" />
+            <Button fx:id="too_easy" mnemonicParsing="false" prefWidth="150.0" styleClass="common-button" text="太简单了" />
+            <Button fx:id="need_review" mnemonicParsing="false" prefWidth="150.0" styleClass="common-button" text="需要复习" />
+            <Button fx:id="not_recognize" mnemonicParsing="false" prefWidth="150.0" styleClass="common-button" text="完全不认识" />
+            <Button fx:id="memorized" disable="true" mnemonicParsing="false" opacity="0.0" prefWidth="100.0" styleClass="common-button" text="我记住了" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

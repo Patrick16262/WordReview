@@ -8,7 +8,7 @@
 
 <VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="100.0" spacing="10.0" stylesheets="@book.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.Book">
    <children>
-      <Pane>
+      <Pane styleClass="image-pane">
          <children>
             <ImageView id="image" fx:id="book_image" fitHeight="140.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
          </children>

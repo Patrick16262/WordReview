@@ -5,7 +5,7 @@ import site.patrickshao.wordreview.dictionaries.entity.basic.Word;
 import site.patrickshao.wordreview.dictionaries.util.Texts;
 import site.patrickshao.wordreview.user.ConfigManager;
 
-public class ConfigUser {
+public class FromConfig {
     public static String getChineseExplanation(Translation translation) {
         String str = null;
         switch (ConfigManager.getConfig().tranStyle) {
@@ -16,7 +16,7 @@ public class ConfigUser {
                 str = Texts.MeaningToString(translation.meanings[0]);
             }
             case single_syno -> {
-                str = Texts.chineseSynoToString(translation.pos, translation.meanings[0].ch_syno.prefix, translation.meanings[0].ch_syno.ch_names[0]);
+                str = Texts.chineseSynoToString(translation.pos, translation.meanings[0].ch_syno.ch_names[0]);
             }
         }
         return str;

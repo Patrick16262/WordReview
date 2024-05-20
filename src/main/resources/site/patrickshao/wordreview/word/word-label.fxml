@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="50.0" maxWidth="200.0" prefHeight="50.0" prefWidth="200.0" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.WordLabel">
+<VBox maxHeight="50.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.WordLabel">
    <children>
-      <HBox fx:id="label_pane" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="selectable-pane">
+      <HBox fx:id="label_pane" alignment="CENTER_RIGHT" prefWidth="200.0" styleClass="selectable-pane" VBox.vgrow="ALWAYS">
          <children>
             <Label fx:id="content" styleClass="selectable-label" text="word" />
             <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
@@ -16,7 +16,7 @@
             </HBox>
          </children>
          <VBox.margin>
-            <Insets left="10.0" right="10.0" />
+            <Insets left="10.0" right="15.0" />
          </VBox.margin>
       </HBox>
       <Separator prefWidth="200.0" scaleY="0.5" />

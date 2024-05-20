@@ -25,3 +25,8 @@
     -fx-font-weight: Bold;
     -fx-font-size: 28;
 }
+
+.common-label {
+    -fx-text-fill: #515151;
+    -fx-font-size: 14;
+}

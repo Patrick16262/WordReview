@@ -1,8 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="560.0" prefWidth="800.0" stylesheets="@tutor.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.tutor.SetTran">
-
+<AnchorPane maxHeight="560.0" maxWidth="800.0" prefHeight="560.0" prefWidth="800.0" stylesheets="@tutor.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.tutor.SetTran">
+   <children>
+      <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label styleClass="title" text="设置您的词义显示">
+               <VBox.margin>
+                  <Insets top="80.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefWidth="800.0" spacing="20.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefWidth="200.0" styleClass="inner-box">
+                     <children>
+                        <ImageView fx:id="simple" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></ImageView>
+                        <VBox alignment="BOTTOM_CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="simple_btn" mnemonicParsing="false" prefWidth="80.0" styleClass="common-button" text="精简" />
+                              <Label styleClass="common-label" text="只显示一个释义" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                     </children></VBox>
+                  <VBox prefWidth="200.0" styleClass="inner-box">
+                     <children>
+                        <ImageView fx:id="normal" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></ImageView>
+                        <VBox alignment="BOTTOM_CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="normal_btn" mnemonicParsing="false" prefWidth="80.0" styleClass="common-button" text="普通" />
+                              <Label styleClass="common-label" text="显示一组释义" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                     </children></VBox>
+                  <VBox prefWidth="200.0" styleClass="inner-box">
+                     <children>
+                        <ImageView fx:id="total" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></ImageView>
+                        <VBox alignment="BOTTOM_CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="total_btn" mnemonicParsing="false" prefWidth="80.0" styleClass="common-button" text="全面" />
+                              <Label styleClass="common-label" text="显示所有释义" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                     </children></VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="80.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

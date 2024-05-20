@@ -5,7 +5,7 @@
 }
 
 .pane {
-    -fx-background-color: transparent;
+    -fx-background-color: #ffffff;
 }
 
 #field {
@@ -24,10 +24,6 @@
 
 #font-icon {
     -fx-text-fill: #ffffff;
-}
-
-.scroll-bar {
-
 }
 
 .title {

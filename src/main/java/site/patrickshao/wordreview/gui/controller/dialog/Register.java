@@ -61,7 +61,7 @@ public class Register implements Initializable {
                 ConfigManager.setUser(db);
                 Platform.runLater(SceneManager::refreshSidebar);
                 Platform.runLater(()->response.setText("注册成功！"));
-                cancel.getOnAction().handle(new ActionEvent());
+                Platform.runLater(() ->cancel.getOnAction().handle(new ActionEvent()));
             } catch (EmailVertificationFailureException e) {
                 Platform.runLater(()->response.setText("该邮箱已注册"));
                 return;

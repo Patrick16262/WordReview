@@ -5,17 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<AnchorPane maxHeight="560.0" maxWidth="600.0" prefHeight="560.0" prefWidth="600.0" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.WordSceneRoot">
+<AnchorPane maxHeight="560.0" maxWidth="600.0" prefHeight="560.0" prefWidth="600.0" styleClass="root" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.WordSceneRoot">
    <children>
       <HBox alignment="CENTER_LEFT" layoutY="496.0" prefHeight="64.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" styleClass="blue-button">
+            <Button fx:id="pre_btn" mnemonicParsing="false" styleClass="blue-button">
                <graphic>
                   <FontIcon fx:id="pre_ico" iconColor="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
                </graphic></Button>
             <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                <children>
-                  <Button mnemonicParsing="false" styleClass="blue-button">
+                  <Button fx:id="next_btn" mnemonicParsing="false" styleClass="blue-button">
                      <graphic>
                         <FontIcon fx:id="next_ico" iconColor="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" />
                      </graphic></Button>

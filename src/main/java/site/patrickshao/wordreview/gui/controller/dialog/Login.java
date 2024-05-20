@@ -53,8 +53,8 @@ public class Login implements Initializable {
                 ConfigManager.setUser(db);
                 Platform.runLater(() -> response.setText("登录成功"));
                 Platform.runLater(SceneManager::refreshSidebar);
-                Platform.runLater(SceneManager::closeDialog);
-                cancel.getOnAction().handle(new ActionEvent());
+                Platform.runLater(() ->cancel.getOnAction().handle(new ActionEvent()));
+
             } catch (EmailVertificationFailureException e) {
                 Platform.runLater(() -> response.setText("该邮箱注册未注册"));
                 return;

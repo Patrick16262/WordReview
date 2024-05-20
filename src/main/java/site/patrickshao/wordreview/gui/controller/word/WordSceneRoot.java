@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
+import site.patrickshao.wordreview.gui.manager.WordSceneManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,5 +32,7 @@ public class WordSceneRoot implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pre_ico.setIconCode(FontAwesomeSolid.ARROW_LEFT);
         next_ico.setIconCode(FontAwesomeSolid.ARROW_RIGHT);
+        pre_btn.setOnAction(event -> WordSceneManager.previousPage());
+        next_btn.setOnAction(event -> WordSceneManager.nextPage());
     }
 }

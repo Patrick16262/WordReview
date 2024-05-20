@@ -1,6 +1,6 @@
 package site.patrickshao.wordreview.exception;
 
-public final class UnhandledException extends RuntimeException{
+public final class UnhandledException extends Error{
     public UnhandledException() {
     }
 

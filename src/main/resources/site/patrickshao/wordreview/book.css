@@ -2,6 +2,6 @@
     -fx-background-color: transparent;
 }
 
-#image:hover {
-    -fx-effect: innershadow(gaussian , #FbFbFb, 10, 0.25, -5, -5);
+#image:hover  {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 5)
 }

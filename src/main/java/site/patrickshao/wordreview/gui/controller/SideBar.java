@@ -1,17 +1,25 @@
 package site.patrickshao.wordreview.gui.controller;
 
 import com.leewyatt.rxcontrols.controls.RXLineButton;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import site.patrickshao.wordreview.exception.TooMuchOperationException;
+import site.patrickshao.wordreview.exception.UnhandledException;
 import site.patrickshao.wordreview.gui.controller.dialog.DialogType;
+import site.patrickshao.wordreview.gui.manager.ApplicationManager;
 import site.patrickshao.wordreview.gui.manager.ImageManager;
 import site.patrickshao.wordreview.gui.manager.SceneManager;
 import site.patrickshao.wordreview.user.ConfigManager;
 import org.kordamp.ikonli.fontawesome5.FontAwesomeSolid;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.IOException;
+import java.net.ConnectException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -45,6 +53,9 @@ public class SideBar implements Initializable {
     private Label sync_text;
     @FXML
     private ImageView userImage;
+    @FXML
+    private AnchorPane root;
+    private Pane altPattern;
 
     public void refreash() {
         if (ConfigManager.getBasicConfig().onlineAccont) {
@@ -56,12 +67,13 @@ public class SideBar implements Initializable {
         }
     }
 
-    public void coverWordPattern() {
-
+    public void useAltPattern(Pane pane) {
+        altPattern = pane;
+        root.getChildren().add(altPattern);
     }
 
-    public void removeWordPattern() {
-
+    public void removeAltPattern() {
+        root.getChildren().remove(altPattern);
     }
 
     public void setSyncTime(LocalDateTime time) {
@@ -79,23 +91,39 @@ public class SideBar implements Initializable {
         }
     }
 
+    public void syncWithServer() {
+        sync_text.setText("正在同步...");
+        ApplicationManager.getBackgroundExecutor().execute( () ->
+                {
+                    try {
+                        ConfigManager.getUserDataBase().syncWithServer();
+                        ConfigManager.loadDataBaseConfig();
+                        Platform.runLater(() -> setSyncTime(ConfigManager.getUserDataBase().getTimeStamp()));
+                        Platform.runLater(this::refreash);
+                    } catch (TooMuchOperationException e) {
+                        Platform.runLater(() -> sync_text.setText("操作过多，请稍后重试"));
+                    } catch (ConnectException e) {
+                        Platform.runLater(() -> sync_text.setText("网络异常"));
+                    } catch (IOException e) {
+                        throw new UnhandledException(e);
+                    }
+                }
+        );
+
+    }
+
+    public void onClick() {
+        if (ConfigManager.getBasicConfig().onlineAccont) {
+            syncWithServer();
+        } else  {
+            SceneManager.showDialog(DialogType.LOGIN);
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreash();
-        user_name.setOnMouseClicked(mouseEvent -> {
-            if (ConfigManager.getBasicConfig().onlineAccont) {
-
-            } else  {
-                SceneManager.showDialog(DialogType.LOGIN);
-            }
-        });
-        user_name.setOnMouseClicked(mouseEvent -> {
-            if (ConfigManager.getBasicConfig().onlineAccont) {
-
-            } else  {
-                SceneManager.showDialog(DialogType.LOGIN);
-            }
-        });
+        user_name.setOnMouseClicked(mouseEvent -> onClick());
+        userImage.setOnMouseClicked(mouseEvent -> onClick());
         house_font.setIconCode(FontAwesomeSolid.WAREHOUSE);
         calen_font.setIconCode(FontAwesomeSolid.CALENDAR_ALT);
         book_font.setIconCode(FontAwesomeSolid.BOOK);

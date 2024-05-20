@@ -11,10 +11,9 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.SideBar">
+<AnchorPane fx:id="root" prefHeight="560.0" prefWidth="200.0" styleClass="sidebar" stylesheets="@side-bar.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.SideBar">
    <children>
-      <VBox layoutX="9.0" layoutY="9.0" stylesheets="@side-bar.css">
+      <VBox layoutX="9.0" layoutY="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox>
                <children>
@@ -59,7 +58,7 @@
                   <String fx:value="selectable-text" />
                </styleClass>
             </RXLineButton>
-            <RXLineButton fx:id="_1" animationTime="35.0ms" prefHeight="60.0" text=" 学习计划">
+            <RXLineButton fx:id="_1" animationTime="35.0ms" prefHeight="60.0" text=" 学习设置">
                <font>
                   <Font size="18.0" />
                </font>

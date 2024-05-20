@@ -10,7 +10,7 @@
 }
 
 .progress-bar .track {
-    -fx-background-color: #f2f2f2;
+    -fx-background-color: #ffffff;
 }
 
 .button {
@@ -51,12 +51,12 @@
 
 .big-int {
     -fx-font-weight: Bold;
-    -fx-font-size: 48;
+    -fx-font-size: 36;
 }
 
 .small-int {
     -fx-text-fill: #6A6672;
-    -fx-font-size: 24;
+    -fx-font-size: 18;
 }
 
 #change-label {
@@ -69,4 +69,13 @@
 
 #today-label {
     -fx-font-weight: Bold;
+}
+
+.selectable-text:hover {
+    -fx-underline: true;
+}
+
+.selectable-image:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 0, 5);
+
 }

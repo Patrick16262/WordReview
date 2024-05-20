@@ -19,65 +19,67 @@ public class DataBases {
 
     public static Database openDataBase(String url_database) {
         var ept = !Files.exists(Path.of(url_database));
+        var db = new Database() {
+            @Getter
+            private final String url = url_database;
+            @Getter
+            private Connection connection;
+            @Getter
+            private boolean empty = ept;
+
+            @Override
+            public void open() throws SQLException {
+                connection = DriverManager.getConnection("jdbc:sqlite:" + url);
+            }
+
+            @Override
+            public void close() throws IOException {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new FileMissingException(e);
+                }
+            }
+
+            @Override
+            public boolean excute(String command) {
+                try {
+                    var state = connection.createStatement();
+                    state.execute(command);
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+
+            @Override
+            public ResultSet query(String command) {
+                try {
+                    var state = connection.createStatement();
+                    return state.executeQuery(command);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+
+            @Override
+            public boolean delete() {
+                if (!Files.exists(Path.of(url))) return true;
+                try {
+                    this.close();
+                    Files.delete(Path.of(url));
+                    return true;
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        };
         try {
-            var db = new Database() {
-                @Getter
-                private final String url = url_database;
-                @Getter
-                private final Connection connection;
-                @Getter
-                private boolean empty = ept;
-
-                {
-                    connection = DriverManager.getConnection("jdbc:sqlite:" + url);
-                }
-
-                @Override
-                public void close() throws IOException {
-                    try {
-                        connection.close();
-                    } catch (SQLException e) {
-                        throw new FileMissingException(e);
-                    }
-                }
-
-                @Override
-                public boolean excute(String command) {
-                    try {
-                        var state = connection.createStatement();
-                        state.execute(command);
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-
-                @Override
-                public ResultSet query(String command) {
-                    try {
-                        var state = connection.createStatement();
-                        return state.executeQuery(command);
-                    } catch (Exception e) {
-                        return null;
-                    }
-                }
-
-                @Override
-                public boolean delete() {
-                    if (!Files.exists(Path.of(url))) return true;
-                    try {
-                        this.close();
-                        Files.delete(Path.of(url));
-                        return true;
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-            };
-            return db;
+            db.open();
         } catch (SQLException e) {
-            throw new UnhandledException(e);
+            throw new RuntimeException(e);
         }
+        return db;
     }
 
     //如果原缓存存在会删掉原缓存

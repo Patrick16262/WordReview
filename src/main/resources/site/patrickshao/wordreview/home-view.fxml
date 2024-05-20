@@ -12,10 +12,10 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <ImageView id="word-book-image" fx:id="word_book_image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView id="word-book-image" fx:id="word_book_image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="selectable-image" />
                   <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="150.0" prefWidth="409.0">
                      <children>
-                        <Label fx:id="book_title" text="点我添加词书" />
+                        <Label fx:id="book_title" styleClass="selectable-text" text="点我添加词书" />
                         <ProgressBar id="progress" fx:id="progress_bar" prefHeight="20.0" prefWidth="387.0" progress="0.0" VBox.vgrow="NEVER" />
                         <HBox>
                            <children>
@@ -72,7 +72,7 @@
                               </VBox>
                               <HBox alignment="BOTTOM_CENTER" fillHeight="false" prefHeight="53.0" prefWidth="215.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Label styleClass="big-int" text="0">
+                                    <Label fx:id="learned" styleClass="big-int" text="0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -88,7 +88,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <Label styleClass="small-int" text="0">
+                                    <Label fx:id="need_learn" styleClass="small-int" text="0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -117,7 +117,7 @@
                               </VBox>
                               <HBox alignment="BOTTOM_CENTER" fillHeight="false" prefHeight="53.0" prefWidth="215.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Label styleClass="big-int" text="0">
+                                    <Label fx:id="reviewed" styleClass="big-int" text="0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -133,7 +133,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Label>
-                                    <Label styleClass="small-int" text="0">
+                                    <Label fx:id="need_review" styleClass="small-int" text="0">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -167,10 +167,17 @@
                   <VBox alignment="CENTER">
                      <children>
                               <Label id="upper-text" text="开始背单词" />
-                              <Label id="down-text" text="预计需要0分钟">
-                           <font>
-                              <Font size="8.0" />
-                           </font></Label>
+                        <HBox alignment="CENTER">
+                           <children>
+                                    <Label id="down-text" text="预计需要">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                              </Label>
+                              <Label id="down-text" fx:id="time_need" text="0" />
+                              <Label id="down-text" text="分钟" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </graphic>

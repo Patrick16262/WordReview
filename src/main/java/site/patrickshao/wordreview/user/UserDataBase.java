@@ -20,7 +20,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 
 @Getter
@@ -28,7 +31,7 @@ public class UserDataBase implements Comparable<UserDataBase> {
     //todo
 //    private final String uri = Web.userServer;
 //    private final String uri = "http://127.0.0.1:2334";
-    private final Database database;
+    private Database database;
     private final int id;
     private final String encrypted_password;
     private static final HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofMillis(2000)).build();
@@ -55,7 +58,7 @@ public class UserDataBase implements Comparable<UserDataBase> {
     public UserDataBase(int id, String encryptedPassword, boolean isLocal) throws InvalidAccontPassword, InvalidAccontId, TooMuchOperationException, ConnectException {
         this.id = id;
         this.encrypted_password = encryptedPassword;
-        int code = 0;
+        int code = 200;
         if (isLocal) {
             if (!Users.authenticate(id, encrypted_password))
                 code = 505;
@@ -68,7 +71,7 @@ public class UserDataBase implements Comparable<UserDataBase> {
         if (code == 606)
             throw new TooMuchOperationException();
         if (code != 200)
-            throw new UnhandledException();
+            throw new UnhandledException(String.valueOf(code));
         database = DataBases.openDataBase(Constants.DateBase.user_dir
                 + Integer.toString(id) + Constants.DateBase.filename_suffix);
     }
@@ -110,16 +113,16 @@ public class UserDataBase implements Comparable<UserDataBase> {
         try {
             db = new UserDataBase(id, encrypted_password, true);
         } catch (InvalidAccontId e) {
-            throw new RuntimeException(e);
+            throw new UnhandledException(e);
         } catch (TooMuchOperationException e) {
-            throw new RuntimeException(e);
+            throw new UnhandledException(e);
         } catch (ConnectException e) {
-            throw new RuntimeException(e);
+            throw new UnhandledException(e);
         }
         return db;
     }
 
-    public boolean upload() throws ConnectException, TooMuchOperationException {
+    public void upload() throws ConnectException, TooMuchOperationException {
         HttpRequest request = null;
         try {
             request = HttpRequest.newBuilder()
@@ -143,7 +146,14 @@ public class UserDataBase implements Comparable<UserDataBase> {
         if (response.statusCode() != 200) {
             throw new UnhandledException();
         }
-        return true;
+    }
+
+    public void syncWithServer() throws ConnectException, TooMuchOperationException {
+//        getFromServer();
+//        database = DataBases.openDataBase(Constants.DateBase.user_dir
+//                + Integer.toString(id) + Constants.DateBase.filename_suffix);
+        upload();
+        return;
     }
 
     private int getFromServer() throws ConnectException {
@@ -165,24 +175,7 @@ public class UserDataBase implements Comparable<UserDataBase> {
                 Files.deleteIfExists(Path.of(Constants.DateBase.user_dir + "temp" + id + Constants.DateBase.filename_suffix));
                 return response.statusCode();
             } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if (Files.exists(Path.of(Constants.DateBase.user_dir + id + Constants.DateBase.filename_suffix))) {
-            UserDataBase otherDb = null;
-            UserDataBase thisDb = null;
-            try {
-                otherDb = UserDataBase.openLocalDateBase(id, encrypted_password);
-            } catch (InvalidAccontPassword e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                thisDb = UserDataBase.open(temp_db);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            if (thisDb.compareTo(otherDb) <= 0) {
-                return response.statusCode();
+                throw new UnhandledException(e);
             }
         }
         try {
@@ -190,14 +183,15 @@ public class UserDataBase implements Comparable<UserDataBase> {
                     , Path.of(Constants.DateBase.user_dir + id + Constants.DateBase.filename_suffix)
                     , StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UnhandledException(e);
         }
         return response.statusCode();
     }
 
 
-    public void saveConfig(String str) throws IOException {
+    public void saveConfig(String[] args) throws IOException {
         var rs = database.query("SELECT name FROM sqlite_master WHERE type='table' AND name='config';");
+        String str = new Gson().toJson(args);
         try {
             if (!rs.next()) {
                 database.excute("create table config(content varchar)");
@@ -211,14 +205,17 @@ public class UserDataBase implements Comparable<UserDataBase> {
         }
     }
 
-    public String loadConfig() throws IOException {
+    public String[] loadConfig() throws IOException {
         var rs = database.query("SELECT content FROM config");
+        String str = null;
+        if (rs == null) return null;
         try {
             rs.next();
-            return rs.getString("content");
+            str = rs.getString("content");
         } catch (SQLException e) {
             throw new IOException(e);
         }
+        return new Gson().fromJson(str, String[].class);
     }
 
 
@@ -239,6 +236,17 @@ public class UserDataBase implements Comparable<UserDataBase> {
             throw new RuntimeException(e);
         }
         return thisDate.compareTo(otherDate);
+    }
+
+    public LocalDateTime getTimeStamp() {
+        Timestamp thisDate;
+        var rs = database.query("select timestamp from basic");
+        try {
+            thisDate = rs.getTimestamp("timestamp");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return thisDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     @Data

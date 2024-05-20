@@ -30,7 +30,7 @@ public class Constants {
     }
 
     public static class Web {
-//        public static final URI userServer = "http://206.237.6.142:2334";
-        public static final URI userServer = URI.create("http://127.0.0.1:2334");
+        public static final URI userServer = URI.create("http://206.237.6.142:2334");
+//        public static final URI userServer = URI.create("http://127.0.0.1:2334");
     }
 }

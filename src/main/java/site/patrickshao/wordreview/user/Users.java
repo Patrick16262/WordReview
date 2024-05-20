@@ -81,6 +81,9 @@ public class Users {
         var id = getIdByEmail(email);
         return new UserDataBase(id, encrypted_password, false);
     }
+    public static UserDataBase login(int id, String encrypted_password) throws EmailVertificationFailureException, ConnectException, InvalidEmailName, TooMuchOperationException, InvalidAccontId, InvalidAccontPassword {
+        return new UserDataBase(id, encrypted_password, false);
+    }
     public static String encrypte(String str) {
         try {
             // 创建MD5消息摘要对象

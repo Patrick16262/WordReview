@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            stylesheets="@word.css"
-            fx:controller="site.patrickshao.wordreview.gui.controller.word.ChooseChinese"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@word.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="site.patrickshao.wordreview.gui.controller.word.ChooseChinese">
+   <children>
+      <VBox fx:id="inner_vbox" alignment="CENTER" fillWidth="false" layoutX="188.0" layoutY="100.0" prefHeight="350.0" prefWidth="400.0" spacing="10.0" styleClass="inner-box" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <VBox alignment="CENTER" maxWidth="350.0" spacing="10.0" styleClass="inner-box">
+               <children>
+                  <Button fx:id="choice0" maxWidth="350.0" minWidth="200.0" mnemonicParsing="false" styleClass="common-button" text="Button" VBox.vgrow="NEVER" />
+                  <Button fx:id="choice1" maxWidth="350.0" minWidth="200.0" mnemonicParsing="false" styleClass="common-button" text="Button" VBox.vgrow="NEVER" />
+                  <Button fx:id="choice2" maxWidth="350.0" minWidth="200.0" mnemonicParsing="false" styleClass="common-button" text="Button" VBox.vgrow="NEVER" />
+                  <Button fx:id="choice3" maxWidth="350.0" minWidth="200.0" mnemonicParsing="false" styleClass="common-button" text="Button" VBox.vgrow="NEVER" />
+               </children>
+            </VBox>
+         </children></VBox>
+   </children>
 </AnchorPane>

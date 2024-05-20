@@ -17,10 +17,13 @@ import lombok.Getter;
 import site.patrickshao.wordreview.Main;
 import site.patrickshao.wordreview.exception.UnhandledException;
 import site.patrickshao.wordreview.gui.controller.HomeView;
+import site.patrickshao.wordreview.gui.controller.PlanView;
 import site.patrickshao.wordreview.gui.controller.RootPane;
 import site.patrickshao.wordreview.gui.controller.SideBar;
 import site.patrickshao.wordreview.gui.controller.dialog.DialogRoot;
 import site.patrickshao.wordreview.gui.controller.dialog.DialogType;
+import site.patrickshao.wordreview.user.ConfigManager;
+import site.patrickshao.wordreview.user.entity.PlanGenerator;
 
 
 import java.io.IOException;
@@ -47,6 +50,28 @@ public class SceneManager {
     private static StackPane dialog;
     private static Button dialogCloseBtn;
     private static HomeView homeViewController;
+    private static PlanView planViewController;
+
+    public static void startReciting(PlanGenerator generator) {
+        try {
+            WordSceneManager.loadScenes(generator);
+        } catch (IOException e) {
+            throw new UnhandledException(e);
+        }
+        WordSceneManager.start(mainPane);
+    }
+
+    public static void refreshConfigView() {
+        planViewController.refresh();
+    }
+
+    public static void useAltSidebar(Pane pane) {
+        sideBarController.useAltPattern(pane);
+    }
+
+    public static void removeAltSidebar() {
+        sideBarController.removeAltPattern();
+    }
 
     public static void startWithTutor(Stage primaryStage) throws IOException {
         sidebarDisabled = true;
@@ -95,6 +120,7 @@ public class SceneManager {
             throw new RuntimeException();
         }
         loadNodes();
+        refreshHomeView();
         sideBar.setLayoutX(-200);
         sideBar.setLayoutY(40);
         rootPane.getChildren().add(0, sideBar);
@@ -134,6 +160,7 @@ public class SceneManager {
     }
 
     public static void refreshHomeView() {
+        ConfigManager.getBookManager().refreshLearned();
         homeViewController.refresh();
     }
 
@@ -159,7 +186,9 @@ public class SceneManager {
 
         fixedPages.add(loaderHome.load());
         homeViewController = loaderHome.getController();
-        fixedPages.add(getLoader("plan-view.fxml").load());
+        FXMLLoader loader = getLoader("plan-view.fxml");
+        fixedPages.add(loader.load());
+        planViewController = loader.getController();
         fixedPages.add(getLoader("book-view.fxml").load());
         fixedPages.add(getLoader("dict-view.fxml").load());
         fixedPages.add(getLoader("info-view.fxml").load());

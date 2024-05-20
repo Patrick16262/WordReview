@@ -15,10 +15,7 @@ import lombok.Getter;
 import site.patrickshao.wordreview.dictionaries.entity.WordBook;
 import site.patrickshao.wordreview.dictionaries.entity.basic.Word;
 import site.patrickshao.wordreview.dictionaries.util.Texts;
-import site.patrickshao.wordreview.gui.manager.ApplicationManager;
-import site.patrickshao.wordreview.gui.manager.ImageManager;
-import site.patrickshao.wordreview.gui.manager.SceneManager;
-import site.patrickshao.wordreview.gui.manager.TutorSceneManager;
+import site.patrickshao.wordreview.gui.manager.*;
 import site.patrickshao.wordreview.user.ConfigManager;
 
 import java.net.URL;
@@ -74,8 +71,8 @@ public class ConfigBook implements Initializable {
         SceneManager.refreshHomeView();
         if (tutorMod) TutorSceneManager.nextPage();
         cancel_btn.getOnAction().handle(new ActionEvent());
+        SceneManager.refreshHomeView();
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -3,7 +3,7 @@ package site.patrickshao.wordreview.user;
 import com.google.gson.Gson;
 import lombok.*;
 import site.patrickshao.wordreview.constants.Constants;
-import site.patrickshao.wordreview.exception.InvalidAccontPassword;
+import site.patrickshao.wordreview.exception.*;
 import site.patrickshao.wordreview.user.entity.*;
 
 import java.io.IOException;
@@ -30,12 +30,32 @@ public class ConfigManager {
         basicConfig.onlineAccont = true;
         basicConfig.user_id = user.getId();
         basicConfig.encrypted_password = user.getEncrypted_password();
+        try {
+            saveBasicConfig();
+        } catch (IOException e) {
+            throw new UnhandledException(e) ;
+        }
     }
 
+    public static void saveBasicConfig() throws IOException{
+        var basicJson = new Gson().toJson(basicConfig);
+        try (var writer = Files.newBufferedWriter(Path.of(Constants.Files.basicConfig))) {
+            writer.write(basicJson);
+            writer.flush();
+        }
+    }
 
-    public static void setDefaultConfig() {
+    public static void setDefaultBasicConfig() {
+        userDataBase = UserDataBase.openOfflineDatebase();
         basicConfig = new BasicConfig(false, -1, null);
         needTutor = true;
+        try {
+            saveBasicConfig();
+        } catch (IOException e) {
+            throw new UnhandledException(e);
+        }
+    }
+    public static void setDefaultConfig() {
         config = new Config();
         config.allWordConfig = new Config.WordConfig(true,
                 new int[]{1, 3, 7, 12},
@@ -43,16 +63,17 @@ public class ConfigManager {
                 new LearnMethod[]{LearnMethod.Selection_En, LearnMethod.Selection_Trans, LearnMethod.WriteEnglish}
         ,new LearnMethod[]{LearnMethod.Selection_En, LearnMethod.Selection_Trans});
         config.differsImportance = false;
-        config.tranStyle = TranStyle.single_trans;
-        bookManager = new MyBookManagerObj();
-        bookManager.linkAllBooks();
+        config.tranStyle = TranStyle.single_syno;
         config.word_num_per_day = 10;
         config.speechType = SpeechType.US;
-        userDataBase = UserDataBase.openOfflineDatebase();
+        bookManager = MyBookManagerObj.createEmptyObj();
+        bookManager.refreshLearned();
+
     }
 
-    public static void loadConfig() throws IOException {
+    public static void loadConfigs() throws IOException {
         if (!Files.exists(Path.of(Constants.Files.basicConfig))) {
+            setDefaultBasicConfig();
             setDefaultConfig();
         }
         else {
@@ -60,21 +81,35 @@ public class ConfigManager {
             if (basicConfig.onlineAccont) {
                 userDataBase = null;
                 try {
-                    userDataBase = UserDataBase.openLocalDateBase(basicConfig.user_id, basicConfig.encrypted_password);
-                } catch (InvalidAccontPassword e) {
-                    throw new IOException(e);
+                    userDataBase = Users.login(basicConfig.user_id, basicConfig.encrypted_password);
+                } catch (InvalidAccontPassword | TooMuchOperationException | EmailVertificationFailureException |
+                         InvalidEmailName e) {
+                    setDefaultConfig();
+                    return;
                 }
             } else {
                 userDataBase = UserDataBase.openOfflineDatebase();
             }
-            bookManager.linkAllBooks();
+            loadDataBaseConfig();
         }
     }
 
+    public static void loadDataBaseConfig() throws IOException {
+        String[] jsons= userDataBase.loadConfig();
+        if (jsons == null) {
+            if (config == null) setDefaultConfig();
+            else saveConfig();
+            return;
+        }
+        config = new Gson().fromJson(jsons[0], Config.class);
+        bookManager = MyBookManagerObj.fromJson(jsons[1]);
+    }
+
     public static void saveConfig() throws IOException{
-        new Gson().toJson(basicConfig, Files.newBufferedWriter(Path.of(Constants.Files.basicConfig)));
-        var json = new Gson().toJson(config);
-        userDataBase.saveConfig(json);
+        saveBasicConfig();
+        var json1 = new Gson().toJson(config);
+        var json2 = bookManager.toJson();
+        userDataBase.saveConfig(new String[] {json1, json2});
     }
 
 

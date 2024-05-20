@@ -98,10 +98,12 @@ public class Texts {
         var ss = str.split("[ ]*[,，][ ]*");
         String pre = null;
         if (ss.length != 0) {
-            var marcher = Pattern.compile("(<.*>)|(\\(.*\\))").matcher(ss[0]);
+            var marcher = Pattern.compile("(<.*>)|(\\(.*\\))|(（.*）)").matcher(ss[0]);
             if (marcher.find()) {
-                pre = marcher.group(1);
+                pre = marcher.group(0);
+                ss[0] = ss[0].replace(marcher.group(0), "");
             }
+
         }
         return new Syno(pre, ss);
     }
@@ -160,9 +162,9 @@ public class Texts {
         return str.toString();
     }
 
-    public static String chineseSynoToString(PartOfSpeech pos, String prefix, String syno) {
+    public static String chineseSynoToString(PartOfSpeech pos, String syno) {
         StringBuilder str = new StringBuilder();
-        str.append(fromEnum(pos)).append(prefix == null ? "" : prefix).append(syno == null ? "" : syno);
+        str.append(fromEnum(pos)).append(syno == null ? "" : syno);
         return str.toString();
     }
 }

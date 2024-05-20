@@ -35,7 +35,7 @@
             </TableView>
             <HBox alignment="CENTER" spacing="50.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="confirm_btn" mnemonicParsing="false" prefWidth="100.0" styleClass="common-button" text="修改" />
+                  <Button fx:id="confirm_btn" mnemonicParsing="false" prefWidth="100.0" styleClass="common-button" text="应用" />
                   <Button fx:id="cancel_btn" mnemonicParsing="false" prefWidth="100.0" styleClass="common-button" text="取消" />
                </children>
             </HBox>

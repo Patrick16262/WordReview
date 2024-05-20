@@ -9,6 +9,7 @@ import site.patrickshao.wordreview.dictionaries.manager.WordBookManager;
 import site.patrickshao.wordreview.user.entity.LearnedTran;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -24,17 +25,7 @@ public class MyBook {
         myBook.linkBook();
         return myBook;
     }
-    public static MyBook fromJson(String json) {
-        MyBookJson myBookJson = new Gson().fromJson(json, MyBookJson.class);
-        MyBook myBook = new MyBook();
-        myBook.book_id = myBookJson.book_id;
-        myBook.linkBook();
-        Arrays.stream(myBookJson.learnedTrans).forEach(tran -> {
-            tran.translation = myBook.wordBook.getTranslation(tran.id);
-            myBook.learnedTrans.put(tran.id, tran);
-        });
-        return myBook;
-    }
+
 
     private MyBook(String id) {
         book_id = id;
@@ -42,8 +33,8 @@ public class MyBook {
 
     public void addLearned(String translation_id) {
         if (wordBook == null) linkBook();
-        learnedTrans.put(translation_id,LearnedTran.builder().learned(LocalDateTime.now()).id(translation_id).build());
-        linkTranslation(learnedTrans.get(translation_id));
+        learnedTrans.put(translation_id,LearnedTran.builder().learned(LocalDateTime.now()).markedTooEasy(false).reviewed(new ArrayList<>()).id(translation_id).build());
+        link(learnedTrans.get(translation_id));
         return;
     }
 
@@ -51,7 +42,7 @@ public class MyBook {
         learnedTrans.get(translation_id).reviewed.add(LocalDateTime.now());
     }
 
-    public void linkTranslation(LearnedTran tran) {
+    public void link(LearnedTran tran) {
         tran.translation = wordBook.getTranslation(tran.id);
     }
 
@@ -71,14 +62,28 @@ public class MyBook {
         wordBook = WordBookManager.getWordBook(book_id);
     }
 
-    public String generateJson() {
-        var myJson = new MyBookJson();
-        myJson.learnedTrans = learnedTrans.keySet().toArray(LearnedTran[]::new);
+    public String toJson() {
+        var myJson = new JsonObj();
+        myJson.learnedTrans = learnedTrans.values().toArray(LearnedTran[]::new);
+        Arrays.stream(myJson.learnedTrans).peek(LearnedTran::adaptToJson).forEach(learnedTran -> learnedTrans.put(learnedTran.id, learnedTran));
         myJson.book_id = book_id;
         myJson.deleted = deleted;
         return new Gson().toJson(myJson);
     }
-    private class MyBookJson {
+
+    public static MyBook fromJson(String json) {
+        JsonObj jsonObj = new Gson().fromJson(json, JsonObj.class);
+        Arrays.stream(jsonObj.learnedTrans).forEach(LearnedTran::adaptFromJson);
+        MyBook myBook = new MyBook();
+        myBook.book_id = jsonObj.book_id;
+        return myBook;
+    }
+    public void linkTranslations() {
+        learnedTrans.values().forEach(tran -> {
+            tran.translation = WordBookManager.getWordBook(wordBook.getId()).getTranslation(tran.id);
+        });
+    }
+    private class JsonObj {
         public boolean deleted = false;
         public String book_id;
         public LearnedTran[] learnedTrans;
